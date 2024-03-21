@@ -10,22 +10,25 @@ class ScreenRecorder:
     def __init__(self, master):
         self.master = master
         self.master.title("Screen Recorder")
-        self.master.geometry("200x150")
+        self.master.geometry("200x200")
         self.master.configure(bg="#CD7F32")
+
+        self.label = tk.Label(self.master, text="ScreenRecorder", bg="#CD7F32", fg="white", font=("Arial", 14, "bold"))
+        self.label.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky='ew')
 
         self.recording = False
         self.output_file = ""
-        self.default_output_dir = os.path.expanduser("~/Videos")  # Local padrão para salvar os vídeos
-        self.output_dir_selected = False  # Indica se o usuário já selecionou um local de salvamento
+        self.default_output_dir = os.path.expanduser("~/Videos")
+        self.output_dir_selected = False
 
         self.start_button = tk.Button(self.master, text="Gravar", command=self.start_recording, bg="white", width=10)
-        self.start_button.grid(row=0, column=0, padx=10, pady=10, sticky='ew')
+        self.start_button.grid(row=1, column=0, padx=10, pady=10, sticky='ew')
 
-        self.stop_button = tk.Button(self.master, text="Parar", command=self.stop_recording, state="disabled", bg="red", width=10)
-        self.stop_button.grid(row=0, column=1, padx=10, pady=10, sticky='ew')
+        self.stop_button = tk.Button(self.master, text="Parar", command=self.stop_recording, state="disabled", bg="#FFCCCC", width=10)
+        self.stop_button.grid(row=1, column=1, padx=10, pady=10, sticky='ew')
 
         self.select_button = tk.Button(self.master, text="Selecionar Local", command=self.select_location, bg="white", width=10)
-        self.select_button.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky='ew')
+        self.select_button.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky='ew')
 
         self.file_counter = 1000
 
@@ -35,7 +38,7 @@ class ScreenRecorder:
         self.stop_button.config(state="normal")
 
         if not self.output_dir_selected:
-            # Pergunta ao usuário se deseja selecionar o local de salvamento na primeira gravação
+            
             answer = tk.messagebox.askyesno("Local de Salvamento", "Você gostaria de selecionar o local de salvamento?")
             if answer:
                 self.select_location()
