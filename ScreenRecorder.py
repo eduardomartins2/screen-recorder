@@ -10,20 +10,22 @@ class ScreenRecorder:
     def __init__(self, master):
         self.master = master
         self.master.title("Screen Recorder")
+        self.master.geometry("200x150")
+        self.master.configure(bg="#CD7F32")
 
         self.recording = False
         self.output_file = ""
         self.default_output_dir = os.path.expanduser("~/Videos")  # Local padrão para salvar os vídeos
         self.output_dir_selected = False  # Indica se o usuário já selecionou um local de salvamento
 
-        self.start_button = tk.Button(self.master, text="Gravar", command=self.start_recording)
-        self.start_button.pack()
+        self.start_button = tk.Button(self.master, text="Gravar", command=self.start_recording, bg="white", width=10)
+        self.start_button.grid(row=0, column=0, padx=10, pady=10, sticky='ew')
 
-        self.stop_button = tk.Button(self.master, text="Parar", command=self.stop_recording, state="disabled")
-        self.stop_button.pack()
+        self.stop_button = tk.Button(self.master, text="Parar", command=self.stop_recording, state="disabled", bg="red", width=10)
+        self.stop_button.grid(row=0, column=1, padx=10, pady=10, sticky='ew')
 
-        self.select_button = tk.Button(self.master, text="Selecionar Local", command=self.select_location)
-        self.select_button.pack()
+        self.select_button = tk.Button(self.master, text="Selecionar Local", command=self.select_location, bg="white", width=10)
+        self.select_button.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky='ew')
 
         self.file_counter = 1000
 
